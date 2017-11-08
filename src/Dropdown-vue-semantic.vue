@@ -40,7 +40,7 @@
   import $ from 'jquery'
 
   export default {
-    name: 'Dropdown',
+    name: 'Dropdown-vue-semantic',
     props: [
       'name',
       'fluid',
