@@ -37,7 +37,7 @@
 </template>
 
 <script>
-  import $ from 'jquery'
+  import $ from 'webpack-zepto'
 
   export default {
     name: 'Dropdown-vue-semantic',
