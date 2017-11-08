@@ -6,25 +6,29 @@
 
 ``` bash
 # install dependencies
-npm install
+npm install dropdown-vue-semantic --save-dev
 
-# serve with hot reload at localhost:8080
-npm run dev
+``` bash
+# use
+import dropdown from 'dropdown-vue-semantic'
+{
+  components: {..., dropdown}
+}
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+``` bash
+'name', // like v model
+'fluid', // fluid style
+'searchAble', // enablesearch
+'toLowerCase', // to lower case all options
+'placeholder', // placeholder default
+'fieldId', // id key
+'fieldName', // name key
+'defaultSelected', // default selected from data
+'touch', // event
+'error', // style true error
+'dependOn', // chain depend on v model
+'dependOnName', // idk
+'endPoint', // if options direct from endpoint
+'endPointChild', // still not need
+'options', // options array 'id and name'
+'disabled' // disabled
