@@ -246,7 +246,7 @@
       },
       getPosition () {
         var refs = $(this.$refs['dropdown-list'])
-        if (refs.offset().top + 200 > $(window).innerHeight() + $(window).scrollTop()) return true
+        if (refs.offset().top + 200 > $(window).height() + $(window).scrollTop()) return true
         return false
       },
       clickDropdown () {
