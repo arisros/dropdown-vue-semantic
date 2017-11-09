@@ -2,6 +2,7 @@
   <div id="app">
     <dropdown 
       name="select"
+      disabled="disabled"
       fluid 
       placeholder="Select First"
       field-name="name"
@@ -22,6 +23,7 @@ export default {
   },
   data () {
     return {
+      disabled: true,
       select: 0,
       options: [{id: 1, name: 'Dropdown test'}, {id: 2, name: 'Dropdown test 2'}]
     }
