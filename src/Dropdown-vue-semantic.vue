@@ -333,7 +333,7 @@
           border-radius: 0 0 $border-radius $border-radius;
         }
         .dropdown-default {
-          // background-color: $gray;
+          background-color: #FFFFFF;
           border-radius: $border-radius $border-radius 0 0;
           border-bottom: 0;
         }
@@ -391,7 +391,7 @@
       top: 0;
       opacity: 1;
       visibility: visible;
-      // background-color: $gray;
+      background-color: #FFFFFF;
       border-radius: $border-radius;
       border: 1px solid darken($gray, 10);
       padding: 0.15em 1em;
@@ -404,7 +404,7 @@
       .dropdown-default {
         color: #9F3A38;
         border-color: #E0B4B4;
-        // background-color: #FFF6F6;
+        background-color: #FFFFFF;
       } 
       .dropdown-list {
         border-color: #E0B4B4;
@@ -417,7 +417,7 @@
       cursor: pointer;
       position: relative;
       white-space: nowrap;
-      // background-color: $gray;
+      background-color: #FFFFFF;
       border-radius: $border-radius;
       border: 1px solid darken($gray, 10);
       z-index: 3;
@@ -448,7 +448,7 @@
       list-style: none;
       width: 100%;
       padding: $default-height 0 0 0;
-      // background: $gray;
+      background: #FFFFFF;
       border-radius: $border-radius;
       transition: max-height 0s ease-out;
       li.isnotlist {
