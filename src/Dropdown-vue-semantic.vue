@@ -31,7 +31,7 @@
           v-bind:class="{selected: parseInt(idSelected) === parseInt(item[fieldId])}">
           {{item[fieldName]}}
         </li>
-      <li class="isnotlist" v-if="list.length < 1">Tidak ada data</li>
+      <li class="isnotlist" v-if="list.length < 1 || filteredList.length < 1">Tidak ada data</li>
     </ul>
   </div>
 </template>
