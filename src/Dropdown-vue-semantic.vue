@@ -89,7 +89,7 @@
         // if (this.name === 'jenisFasilitas') console.log('req dropdown from', this.list)
         let list = this.prettyWordList
         let input = new RegExp(this.searchValue.toLowerCase())
-        let data = list.filter(e => { return input.test(e[this.fieldName]) })
+        let data = list.filter(e => { return input.test(e[this.fieldName].toLowerCase()) })
         if (typeof (this.searchAble) === 'undefined') data = list
         return data
       },

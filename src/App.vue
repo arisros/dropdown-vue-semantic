@@ -2,13 +2,13 @@
   <div id="app">
     <dropdown 
       name="select"
-      disabled="disabled"
       fluid 
+      search-able
       placeholder="Select First"
-      field-name="name"
+      field-name="nama"
       field-id="id"
       v-bind:default-selected="select"
-      v-bind:options="options"
+      end-point="http://pdpasar.docotel.net/v1/pasars"
       ></dropdown>
   </div>
 </template>
