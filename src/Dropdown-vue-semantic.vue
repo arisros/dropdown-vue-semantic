@@ -131,7 +131,7 @@
       show () {
         if (!this.show) this.$emit('touch', this.name)
         else {
-          let index = this.filteredList.findIndex(e => { return e[this.fieldId] === this.idSelected })
+          let index = this.filteredList.findIndex(e => { return parseInt(e[this.fieldId]) === this.idSelected })
           let listWrapper = $(this.$refs['dropdown-list'])
           if (!this.dead) listWrapper.scrollTop(parseInt(index) * 38)
         }
@@ -163,7 +163,7 @@
         return newWord
       },
       arrowSelection (type) {
-        let index = this.filteredList.findIndex(e => { return e[this.fieldId] === this.idSelected })
+        let index = this.filteredList.findIndex(e => { return parseInt(e[this.fieldId]) === this.idSelected })
         let listWrapper = $(this.$refs['dropdown-list'])
 
         if (type === 'down' && this.show && index < this.filteredList.length - 1) {
@@ -201,7 +201,7 @@
       },
       findSelected (e) {
         let index = parseInt(this.defaultSelected)
-        return e[this.fieldId] === index
+        return parseInt(e[this.fieldId]) === index
       },
       reqEndPointChild (id) {
         if (typeof (this.endPointChild) !== 'undefined') {
@@ -262,7 +262,7 @@
         setTimeout(() => { this.closeDropdown() }, 200)
       },
       showDropdown () {
-        let index = this.filteredList.findIndex(e => { return e[this.fieldId] === this.idSelected })
+        let index = this.filteredList.findIndex(e => { return parseInt(e[this.fieldId]) === this.idSelected })
         let listWrapper = $(this.$refs['dropdown-list'])
         if (!this.dead) {
           this.show = true

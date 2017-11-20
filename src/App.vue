@@ -7,6 +7,7 @@
       placeholder="Select First"
       field-name="nama"
       field-id="id"
+      v-on:selected="selectChange"
       v-bind:default-selected="select"
       end-point="http://pdpasar.docotel.net/v1/pasars"
       ></dropdown>
@@ -26,6 +27,11 @@ export default {
       disabled: true,
       select: 0,
       options: [{id: 1, name: 'Dropdown test'}, {id: 2, name: 'Dropdown test 2'}]
+    }
+  },
+  methods: {
+    selectChange (e) {
+      this[e.name] = e.value
     }
   }
 }
