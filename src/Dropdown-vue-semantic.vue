@@ -144,7 +144,7 @@
       },
       idSelected () {
         let pub = {
-          value: this.idSelected,
+          value: parseInt(this.idSelected),
           name: this.name
         }
         this.$emit('selected', pub)

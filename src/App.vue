@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <dropdown 
-      name="select"
-      fluid 
+      name="search_pasar"
+      fluid
       search-able
-      placeholder="Select First"
+      placeholder="-Pasar-"
       field-name="nama"
       field-id="id"
       v-on:selected="selectChange"
-      v-bind:default-selected="select"
+      v-bind:default-selected="search_pasar"
       end-point="http://pdpasar.docotel.net/v1/pasars"
       ></dropdown>
   </div>
@@ -25,8 +25,7 @@ export default {
   data () {
     return {
       disabled: true,
-      select: 0,
-      options: [{id: 1, name: 'Dropdown test'}, {id: 2, name: 'Dropdown test 2'}]
+      search_pasar: 0
     }
   },
   methods: {
