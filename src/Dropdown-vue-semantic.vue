@@ -26,11 +26,11 @@
       </div>
     <ul ref="dropdown-list" class="dropdown-list">
       <li 
-          v-for="(item, index) in filteredList"
-          v-on:click="selectDropdown(index, 'close')" 
-          v-bind:class="{selected: parseInt(idSelected) === parseInt(item[fieldId])}">
-          {{item[fieldName]}}
-        </li>
+        v-for="(item, index) in filteredList"
+        v-on:click="selectDropdown(index, 'close')" 
+        v-bind:class="{selected: parseInt(idSelected) === parseInt(item[fieldId])}">
+        {{item[fieldName]}}
+      </li>
       <li class="isnotlist" v-if="list.length < 1 || filteredList.length < 1">Tidak ada data</li>
     </ul>
   </div>
@@ -42,57 +42,76 @@
   export default {
     name: 'Dropdown-vue-semantic',
     props: [
-      'name',
+      'name', // field name
       'fluid',
-      'searchAble',
-      'toLowerCase',
-      'placeholder',
-      'fieldId',
-      'fieldName',
+      'searchAble', // search able optional
+      'toLowerCase', // to lowercase optional
+      'placeholder', // placeholder optional
+      'fieldId', // field name like {id: 2}
+
+      'fieldName', // field name like {id: 2}
       'defaultSelected',
+
       'touch',
       'error',
+
       'dependOn',
       'dependOnName',
-      'endPoint',
-      'endPointChild',
-      'options',
+
+      'endPoint', // string
+      'endPointChild', // string
+
+      'options', // ex: [{name: 'Options1', id: 1}, {name: 'Options2', id: 2}]
       'disabled'
     ],
     data () {
       return {
-        show: false,
-        dead: false,
-        selected: '',
-        idSelected: 0,
-        topPosition: false,
-        requesting: false,
+        show: false, // flag show
+        dead: false, // flag disabling
 
-        searchMode: false,
-        searchValue: '',
+        selected: '', // selected name field
+        idSelected: 0, // id selected
 
-        list: [],
-        childList: []
+        topPosition: false, // positioning
+        requesting: false, // flag requesting
+
+        searchMode: false, // flag search mode
+        searchValue: '', // string search by name
+
+        list: [], // list showing ready
+        childList: [] // list have child
       }
     },
     mounted () {
-      if (typeof (this.endPoint) !== 'undefined') this.reqEndPoint()
-      document.addEventListener('click', () => { this.closeDropdown() })
-      document.addEventListener('keyup', (e) => { if (e.keyCode === 27) this.closeDropdown() })
+      // if endpoint set, do requset
+      if (typeof (this.endPoint) !== 'undefined') this.fetchData()
+      // set list if options defined
       this.list = (typeof (this.options) !== 'undefined') ? this.options : []
 
-      this.getSelected()
-      this.disablingClass()
+      this.getSelected() // find selected
+      this.disablingClass() // disabling if needed
+
+      // create click, keyup(keycode:27) escape on document close dropdown
+      document.addEventListener('click', () => { this.closeDropdown() })
+      document.addEventListener('keyup', (e) => { if (e.keyCode === 27) this.closeDropdown() })
     },
     computed: {
+      /**
+       * filtering, if searchAble defined
+       * set to lowercase for makesure is the same
+       * @return {array} list data
+       */
       filteredList () {
-        // if (this.name === 'jenisFasilitas') console.log('req dropdown from', this.list)
         let list = this.prettyWordList
         let input = new RegExp(this.searchValue.toLowerCase())
         let data = list.filter(e => { return input.test(e[this.fieldName].toLowerCase()) })
         if (typeof (this.searchAble) === 'undefined') data = list
         return data
       },
+      /**
+       * pretty words, set to lowercase first then capitalize
+       * @return {array}
+       */
       prettyWordList () {
         let data = this.list
         if (typeof (this.toLowerCase) !== 'undefined') {
@@ -103,24 +122,39 @@
         }
         return data
       },
+      /**
+       * hidden class if searchable defined
+       * @return {boolean}
+       */
       hiddenClass () {
         return (typeof (this.searchAble) !== 'undefined')
       },
+      /**
+       * fluid class if fluid defined
+       * @return {[type]} [description]
+       */
       fluidClass () {
         return (typeof (this.fluid) !== 'undefined')
       },
+      /**
+       * set flag error class if dependOn is defined but 0 and error
+       * @return {boolean}
+       */
       errorGenerator () {
         if (typeof (this.dependOn) !== 'undefined') return this.dependOn > 0 && this.error
         return this.error
       }
     },
     watch: {
+      /**
+       * depend on field of parent id
+       */
       dependOn () {
         this.selected = this.placeholder
         this.list = []
         this.show = false
         if (this.disabled !== 'disabled') this.dead = this.dependOn < 1
-        if (typeof (this.endPoint) !== 'undefined') this.reqEndPoint()
+        if (typeof (this.endPoint) !== 'undefined') this.fetchData()
       },
       defaultSelected () {
         this.getSelected()
@@ -141,6 +175,7 @@
         this.dead = false
         this.requesting = false
         this.list = this.options
+        this.getSelected()
       },
       idSelected () {
         let pub = {
@@ -203,7 +238,7 @@
         let index = parseInt(this.defaultSelected)
         return parseInt(e[this.fieldId]) === index
       },
-      reqEndPointChild (id) {
+      fetchDataChild (id) {
         if (typeof (this.endPointChild) !== 'undefined') {
           this.$http.get(this.endPointChild + '/' + id)
             .then((response) => {
@@ -214,7 +249,7 @@
             })
         }
       },
-      reqEndPoint () {
+      fetchData () {
         this.idSelected = 0
 
         var self = this
@@ -229,7 +264,6 @@
               self.getSelected()
             })
             .then(() => {
-              // this.disablingClass()
               if (dependOn > 0 && this.disabled !== 'disabled') this.dead = false
               this.requesting = false
             })
@@ -241,7 +275,7 @@
       selectDropdown (index, type) {
         this.selected = this.filteredList[index][this.fieldName]
         this.idSelected = this.filteredList[index][this.fieldId]
-        if (typeof (endPointChild) !== 'undefined') this.reqEndPointChild(this.idSelected)
+        if (typeof (endPointChild) !== 'undefined') this.fetchDataChild(this.idSelected)
         if (type === 'close') this.closeDropdown()
       },
       getPosition () {
