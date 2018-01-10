@@ -207,7 +207,7 @@
         if (typeof (this.endPointChild) !== 'undefined') {
           this.$http.get(this.endPointChild + '/' + id)
             .then((response) => {
-              this.$emit('child', response.data)
+              this.$emit('child', response.data.items)
             })
             .catch(err => {
               if (err) console.log(err)
@@ -225,7 +225,7 @@
         if (dependOn > 0 || typeof (this.dependOn) === 'undefined') {
           this.$http.get(endPoint)
             .then((response) => {
-              self.list = response.data
+              self.list = response.data.items
               self.getSelected()
             })
             .then(() => {
