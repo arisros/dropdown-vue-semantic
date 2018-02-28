@@ -10,8 +10,9 @@
       up: topPosition
     }">
     <input
+      v-on:blur="blurDropdown"
+      v-bind:placeholder="placeholder"
       v-model="searchValue"
-      v-on:blur="blurDropdown" 
       v-on:focus="renders" 
       v-on:keyup.enter="closeDropdown"
       v-on:keyup.up="arrowSelection('up')"
@@ -20,9 +21,12 @@
       type="text">
     <div 
       v-on:click.stop="clickDropdown"
+      v-if="!searchMode"
       class="dropdown-default">
-        <span v-if="requesting && !searchMode">Tunggu..</span>
-        <span v-if="!requesting && !searchMode">{{selected}}</span>
+        <span 
+          v-if="requesting && !searchMode">Tunggu..</span>
+        <span 
+          v-if="!requesting && !searchMode">{{selected}}</span>
       </div>
     <ul ref="dropdown-list" class="dropdown-list">
       <li 
@@ -419,6 +423,7 @@
       visibility: none;
       opacity: 0;
       left: 0;
+      width: inherit;
     }
     .search {
       position: absolute;
@@ -428,11 +433,12 @@
       background-color: #FFFFFF;
       border-radius: $border-radius;
       border: 1px solid darken($gray, 10);
+      border-right: 0;
       padding: 0.15em 1em;
       height: 38px;
       outline: 0;
-      width: 100%;
-      z-index: 10000
+      width: inherit;
+      z-index: 10000;
     }
     &.error {
       .dropdown-default {
@@ -480,7 +486,7 @@
       z-index: 1;
       max-height: $default-height;
       list-style: none;
-      width: 100%;
+      width: inherit;
       padding: $default-height 0 0 0;
       background: #FFFFFF;
       border-radius: $border-radius;
