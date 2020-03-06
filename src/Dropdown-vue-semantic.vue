@@ -29,7 +29,8 @@
           v-if="!requesting && !searchMode">{{selected}}</span>
       </div>
     <ul ref="dropdown-list" class="dropdown-list">
-      <li 
+      <li
+        v-bind:key="{index}"
         v-for="(item, index) in filteredList"
         v-on:click="selectDropdown(index, 'close')" 
         v-bind:class="{selected: parseInt(idSelected) === parseInt(item[fieldId])}">
@@ -366,7 +367,7 @@
     }
     &.active {
       &.error {
-        &.up .dropdown-default,  {
+        &.up .dropdown-default  {
           border-bottom: 1px solid lighten(red, 20);
           border-radius: 0 0 $border-radius $border-radius;
         }
